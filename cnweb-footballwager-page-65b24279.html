@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>足球投注 · 资讯对照与赛事延伸</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f0f2f5;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    /* hero 区域 */
+    .hero {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 550;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #334155;
+      max-width: 760px;
+    }
+    /* 两栏布局 */
+    .grid-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.8rem 1.6rem;
+      border: 1px solid #e9edf2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    }
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid #dbeafe;
+    }
+    .card ul, .card p {
+      font-size: 0.98rem;
+      color: #2c3e50;
+    }
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .card li {
+      margin-bottom: 0.6rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .card li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #3b82f6;
+      font-weight: bold;
+    }
+    .tag {
+      display: inline-block;
+      background: #eef2ff;
+      color: #1e40af;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.15rem 0.7rem;
+      border-radius: 30px;
+      margin-right: 0.3rem;
+      letter-spacing: 0.01em;
+    }
+    /* 典型场景/示意卡片 (独立) */
+    .scene-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.8rem 1.6rem;
+      margin-bottom: 2.2rem;
+      border: 1px solid #e6eaf0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .scene-card h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 1rem;
+    }
+    .scene-item {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .scene-item > div {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      flex: 1 1 180px;
+      border: 1px solid #edf2f7;
+    }
+    .scene-item strong {
+      display: block;
+      font-weight: 600;
+      color: #1e3a5f;
+      margin-bottom: 0.3rem;
+    }
+    .scene-item span {
+      font-size: 0.9rem;
+      color: #475569;
+    }
+    /* 提示与FAQ混合区 */
+    .notice-faq {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 1.8rem;
+      margin-bottom: 2rem;
+    }
+    .faq-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.5rem 1.6rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .faq-box h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      border-left: 4px solid #3b82f6;
+      padding-left: 0.75rem;
+    }
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+    .faq-item .q {
+      font-weight: 550;
+      color: #1e293b;
+      font-size: 0.94rem;
+    }
+    .faq-item .a {
+      font-size: 0.9rem;
+      color: #3f4a5c;
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+    .notice-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.5rem 1.6rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .notice-box h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.8rem;
+      border-left: 4px solid #f59e0b;
+      padding-left: 0.75rem;
+    }
+    .notice-box p {
+      font-size: 0.92rem;
+      color: #2c3e50;
+      margin-bottom: 0.6rem;
+    }
+    .notice-box small {
+      display: block;
+      color: #5e6f8d;
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+    }
+    .link-inline {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted #94a3b8;
+    }
+    .link-inline:hover {
+      color: #1d4ed8;
+      border-bottom-color: #2563eb;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #64748b;
+      border-top: 1px solid #dce1e9;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      letter-spacing: 0.01em;
+    }
+    /* 响应式 */
+    @media (max-width: 700px) {
+      .grid-two {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .notice-faq {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      body {
+        padding: 1rem 0.8rem;
+      }
+      .scene-item > div {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <!-- hero 简明介绍 -->
+  <div class="hero">
+    <h1>赛事脉络 · 对照参考 · 延伸阅读</h1>
+    <p>围绕<a href="https://cnweb-footballwager.com" class="link-inline">足球投注</a>的日常信息场景，为需要快速查对赛前数据、联赛趋势以及投注术语的用户提供一份结构化的导读。内容聚焦于基础事实与常见参照，不构成任何操作引导或收益预期。</p>
+  </div>
+
+  <!-- 双栏：亮点 + 使用建议 -->
+  <div class="grid-two">
+    <div class="card">
+      <h2>⚡ 亮点摘要</h2>
+      <ul>
+        <li>覆盖主流联赛（英超、西甲、德甲、意甲、法甲）及杯赛数据对照</li>
+        <li>赔率变动、伤停信息与交锋记录可交叉查阅</li>
+        <li>投注类型说明：独赢、让球、大小球、波胆等基本概念清晰区分</li>
+        <li>实时赛程与未来赛历并行展示，便于纵向比对</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>📘 使用建议</h2>
+      <ul>
+        <li>建议先浏览联赛总览，再按需筛选球队或轮次</li>
+        <li>对比多家数据源时留意更新频率与截止时间</li>
+        <li>查阅历史盘口时注意赛季与主客场标识</li>
+        <li>第三方分析仅供参考，最终判断请结合自身信息</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 典型使用场景 (日常查询/对照) -->
+  <div class="scene-card">
+    <h2>🔍 日常查询 · 对照 · 延伸</h2>
+    <div class="scene-item">
+      <div>
+        <strong>赛前对照</strong>
+        <span>快速对比两队近5场进球、失球及交锋数据，<br>辅助理解当前盘口背景。</span>
+      </div>
+      <div>
+        <strong>术语延伸</strong>
+        <span>从“亚洲盘口”到“水位变化”，<br>查阅基础词条与常见场景解释。</span>
+      </div>
+      <div>
+        <strong>联赛纵览</strong>
+        <span>积分榜、主客场战绩、净胜球分布，<br>可做赛季中期趋势参考。</span>
+      </div>
+      <div>
+        <strong>日历提醒</strong>
+        <span>标记国家队比赛日、冬歇期及关键德比，<br>便于提前规划关注时间。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 混合区: 提示 + FAQ摘要 -->
+  <div class="notice-faq">
+    <div class="notice-box">
+      <h3>📌 使用提示</h3>
+      <p>本页所涉数据均为公开信息汇编，不包含任何预测、推荐或保证。不同平台的数据更新可能存在数分钟延迟，实时性请以具体来源为准。请始终基于个人理解做出判断。</p>
+      <p>若需深入查阅特定联赛或盘口解读，可前往<a href="https://cnweb-footballwager.com" class="link-inline">足球投注</a>信息页进行扩展浏览。</p>
+      <small>建议搭配官方统计或权威体育媒体交叉验证。</small>
+    </div>
+    <div class="faq-box">
+      <h3>❓ 常见简短说明</h3>
+      <div class="faq-item">
+        <div class="q">“让球”数值每天都会变吗？</div>
+        <div class="a">会随投注量、球队新闻及市场预期动态调整，通常赛前1～2小时趋于稳定。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">大小球盘口依据什么设定？</div>
+        <div class="a">基于两队平均进球数、防守风格及历史同类型对阵的进球分布，由模型与操盘手综合给出。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">为什么同一场比赛不同平台赔率不同？</div>
+        <div class="a">各平台风控策略、用户结构及利润点不同，属于正常市场差异，可作参考但不必追求一致。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer-note">
+    基于公开数据汇编 · 仅供信息对照<br>
+    所有内容不构成任何形式的投资或参与建议。
+  </div>
+</div>
+</body>
+</html>
